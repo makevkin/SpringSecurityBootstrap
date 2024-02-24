@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+<table>
+    <tr>  <!-- tr - строка в таблице -->
+        <th>Id</th>
+        <th>Name</th>  <!-- шапка таблицы-->
+        <th>Role</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}">
+        <td th:text="${user.username}"></td> <!--Ячейка в таблице -->
+
+        <td th:each="role: ${user.roles}" th:text="${role.name}"></td>
+
+        <td>
+            <form id="formDelete" th:method="DELETE"
+            th:action="@{admin/delete/{id} (id=${user.id})}"
+            th:object="${user}">
+            <button>DEL</button>
+            </form>
+        </td>
+        <!--
+        <td>
+            <form id="formEdit" th:method="PATCH"
+                  th:action="@{admin/addOrUpdate/{id} (id=${user.id})}"
+                  th:object="${user}">
+                <button>Edit</button>
+            </form>
+        </td>-->
+        <td>
+            <form style="display: inline-block" th:action="@{/admin/update}" th:method="POST">
+                <input type="hidden" th:name="id" th:value="${user.getId()}"/>
+                <input type="submit" value="Update">
+            </form>
+        </td>
+        <!--
+        <td>
+            <a th:href="'admin/update1?id='+${user.id}">Edit</a>
+        </td> -->
+        <td>
+            <form style="display: inline-block" th:action="@{/user}" th:method="get">
+                <input type="hidden" th:name="id" th:value="${user.getId()}"/>
+                <input type="submit" value="Info">
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<tr>
+    <a href="/admin/add">Create new user</a>
+</tr>
+<br><br>
+<form th:action="@{/logout}" th:method="post">
+    <button>Выйти</button>
+</form>
+</body>
+</html>
