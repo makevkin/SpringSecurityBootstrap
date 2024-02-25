@@ -14,10 +14,13 @@
 <body>
 <nav class="navbar navbar-light" style="background-color: dimgrey">
     <div class="container-fluid">
-            <h2 th:text="${user.username}" style="color: white"></h2>
-            <form th:action="@{/logout}"  th:method="post">
-                <button class="btn btn-outline-light ms-auto" style="background: dimgrey" >Logout</button>
-            </form>
+        <span th:each="role: ${user.roles}" >
+        <h2 th:text="${user.username} + ' with role: ' + ${role.name}" style="color: white"></h2>
+        </span>
+        <form th:action="@{/logout}"  th:method="post">
+            <button class="btn btn-outline-light ms-auto" style="background: dimgrey" >Logout</button>
+        </form>
+
     </div>
 </nav>
 
@@ -31,32 +34,32 @@
     <div  style="padding: 20px; background: lightgrey; flex-grow: 1;">
         <h1>User information-page</h1>
         <div class="card">
-        <div class="card-body">
-            <h2 class="card-text">About user</h2>
-        </div>
-        <div class="card-footer">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Role</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                <th scope="row" th:utext="${user.id}">ID</th> <!--Ячейка в таблице -->
-                <th scope="row" th:utext="${user.username}">Username</th>
-                <th>
-                <span th:each="role: ${user.roles}" th:text="${role.name}"></span>
-                </th>
+            <div class="card-body">
+                <h2 class="card-text">About user</h2>
+            </div>
+            <div class="card-footer">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row" th:utext="${user.id}">ID</th> <!--Ячейка в таблице -->
+                        <th scope="row" th:utext="${user.username}">Username</th>
+                        <th>
+                            <span th:each="role: ${user.roles}" th:text="${role.name}"></span>
+                        </th>
 
-            </tr>
-            </table>
+                    </tr>
+                </table>
+            </div>
         </div>
+        <br><br>
     </div>
-<br><br>
-
 </div>
 </body>
 </html>
