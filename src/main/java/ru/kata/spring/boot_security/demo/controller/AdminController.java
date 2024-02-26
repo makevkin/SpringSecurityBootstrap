@@ -68,7 +68,7 @@ public class AdminController {
 
     }
     @PatchMapping("/update1/{id}")
-    public String add1(@PathVariable("id") Long id, @ModelAttribute("user") User user, Model model){
+    public String add1(@PathVariable("id") Long id, @Valid @ModelAttribute("user") User user, Model model){
         List<Role> roles = (List<Role>) roleRepository.findAll();
         model.addAttribute("allRoles", roles);
         userService.update(id, user);

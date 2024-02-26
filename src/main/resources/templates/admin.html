@@ -113,7 +113,7 @@
                                                     <input type="password" class="form-control" id="password" name="password" th:value="${user.password}" >
                                                     <br>
                                                     <label>Roles<br>
-                                                        <select name="roles" th:multiple="true">
+                                                        <select name="roles" multiple size="2">
                                                             <option th:each="role : ${allRoles}"
                                                                 th:value="${role.id}"
                                                                 th:text="${role.name}">
