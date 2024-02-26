@@ -67,6 +67,13 @@ public class AdminController {
         return "addUser";
 
     }
+    @PatchMapping("/update1/{id}")
+    public String add1(@PathVariable("id") Long id,  Model model){
+        model.addAttribute("user", userService.findById(id).get());
+        List<Role> roles = (List<Role>) roleRepository.findAll();
+        model.addAttribute("allRoles", roles);
+        return "addUser";
+    }
 //    @GetMapping("/update1") // ссылка
 //    public String updateUser(@RequestParam("id") Long id, Model model) {
 //        User user = userService.findById(id).get();

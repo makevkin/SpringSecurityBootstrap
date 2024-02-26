@@ -20,8 +20,7 @@
 <form th:method="post" th:action="@{/admin/addUser}" th:object="${user}">
     <input hidden="hidden" type="number" th:field="*{id}" id="id"/> <!-- делаем невидимым поле id-->
     <label for="username">Enter name: </label>
-    <input type="text" class="form-control" id="username" name="username"
-           th:value="${user.username}" >
+    <input type="text" class="form-control" id="username" name="username" th:value="${user.username}" >
     <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error"></div>
     <br/>
     <label for="password">Enter password: </label>

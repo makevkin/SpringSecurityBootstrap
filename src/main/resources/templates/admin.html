@@ -21,6 +21,7 @@
         </form>
     </div>
 </nav>
+<!-- левая панель user/admin -->
 <div class="d-flex" style="height: 100vh; width: 100vw;">
     <ul style="width: 250px" class="nav flex-column">
         <li class="nav-item">
@@ -30,6 +31,7 @@
             <a class="nav-link" onclick="window.location.href = '/user'">User</a>
         </li>
     </ul>
+    <!-- Меню с вкладками-->
     <div style="padding: 20px; background: lightgrey; flex-grow: 1;">
         <h1>Admin panel</h1>
         <ul class="nav nav-tabs" role="tablist">
@@ -40,11 +42,11 @@
                 <a class="nav-link" onclick="window.location.href = '/admin/add'">New User</a>
             </li>
         </ul>
+    <!-- Основная панель с информацией вкладка users tаble-->
     <div class="card">
         <div class="card-body">
             <h2 class="card-text">All Users</h2>
-        </div>
-        <div class="card-footer">
+
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -58,7 +60,7 @@
                 <tbody>
                     <tr th:each="user : ${users}">
                         <td th:text="${user.id}">
-                        <td th:text="${user.username}"></td> <!--Ячейка в таблице -->
+                        <td th:text="${user.username}"></td>
                         <td th:each="role: ${user.roles}" th:text="${role.name}"></td>
                         <!--<td>
                             <form style="display: inline-block" th:action="@{/admin/update}" th:method="POST">
@@ -67,34 +69,36 @@
                             </form>
                         </td>-->
 
-                        <td>
-                            <form id="formDelete" th:method="DELETE"
-                            th:action="@{admin/delete/{id} (id=${user.id})}"
-                            th:object="${user}">
-                            <button class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
-
-                        <td>
+                        <td> <!-- кнопка редактирования пользователя-->
                             <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                     th:data-bs-target="${'#modalEdit'+ user.getId()}">Edit
                             </button>
                         </td>
-                            <!-- Modal -->
-                            <div class="modal fade" th:id="${'modalEdit'+user.getId()}">
-                                <!-- Наполнение кнопки Edit, описание модального окна -->
+                        <td> <!--кнопка удаления пользователя-->
+                            <form id="formDelete" th:method="DELETE"
+                                  th:action="@{admin/delete/{id} (id=${user.id})}"
+                                  th:object="${user}">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+
+                            <!-- Модальное окно редактирования пользователя -->
+                            <div class="modal fade" tabindex="-1" th:id="${'modalEdit'+user.getId()}">
+
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <form id="formEdit" th:method="Post"
-                                              th:action="@{admin/update/{id} (id=${user.id})}"
+                                              th:action="@{admin/update1/{id} (id=${user.id})}"
                                               th:object="${user}">
-                                            <div class="modal-header"> <!-- Шапка модального окна -->
+                                            <!-- Шапка модального окна -->
+                                            <div class="modal-header">
                                                 <h5 class="modal-title"
-                                                    id="modalVerticallyCenteredLabel1">
-                                                    Edit user</h5>
+                                                    id="modalVerticallyCenteredLabel1">Edit user</h5>
+                                                <!--Кнопка закрытия окна "Х"-->
                                                 <button type="button" class="btn-close"
-                                                        data-bs-dismiss="modal" aria-label="Cccccc"></button>
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
+                                            <!-- Тело модального окна -->
                                             <div class="modal-body text-center font-weight-bold">
                                                 <div class="row">
                                                     <div class="col-3"></div>
@@ -123,8 +127,7 @@
                                                 <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Close
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">Edit
-                                                </button>
+                                                <button type="submit" class="btn btn-primary">Edit</button>
                                             </div>
                                         </form>
                                     </div>
