@@ -68,11 +68,11 @@ public class AdminController {
 
     }
     @PatchMapping("/update1/{id}")
-    public String add1(@PathVariable("id") Long id,  Model model){
-        model.addAttribute("user", userService.findById(id).get());
+    public String add1(@PathVariable("id") Long id, @ModelAttribute("user") User user, Model model){
         List<Role> roles = (List<Role>) roleRepository.findAll();
         model.addAttribute("allRoles", roles);
-        return "addUser";
+        userService.update(id, user);
+        return "redirect:/admin";
     }
 //    @GetMapping("/update1") // ссылка
 //    public String updateUser(@RequestParam("id") Long id, Model model) {

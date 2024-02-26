@@ -61,7 +61,12 @@
                         <td th:text="${user.id}">
                         <td th:text="${user.username}"></td>
                         <td th:each="role: ${user.roles}" th:text="${role.name}"></td>
-                        <td>
+                        <td> <!-- кнопка редактирования пользователя-->
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                    th:data-bs-target="${'#modalEdit'+ user.getId()}">Edit
+                            </button>
+                        </td>
+                        <td><!-- кнопка удаления пользователя-->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 th:data-bs-target="${'#modalDelete'+user.getId()}">Delete
                         </button>
@@ -71,14 +76,7 @@
                                 <input type="hidden" th:name="id" th:value="${user.getId()}"/>
                                 <input type="submit" class="btn btn-info" value="Edit">
                             </form>
-                        </td>-->
-
-                        <td> <!-- кнопка редактирования пользователя-->
-                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                    th:data-bs-target="${'#modalEdit'+ user.getId()}">Edit
-                            </button>
                         </td>
-                        <!--
                         <td>
                             <form id="formDelete" th:method="DELETE"
                                   th:action="@{admin/delete/{id} (id=${user.id})}"
@@ -91,7 +89,7 @@
                         <div class="modal fade" tabindex="-1" th:id="${'modalEdit'+user.getId()}">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
-                                    <form id="formEdit" th:method="Post"
+                                    <form id="formEdit" th:method="PAtCH"
                                         th:action="@{admin/update1/{id} (id=${user.id})}"
                                         th:object="${user}">
                                         <!-- Шапка модального окна -->
@@ -194,14 +192,7 @@
                     <!-- Модальное окно удаления пользователя -->
                 </tr>
             </table>
-            <br>
-            <tr>
-                <a href="/admin/add">Create new user</a>
-            </tr>
-            <br><br>
-            <form th:action="@{/logout}" th:method="post">
-                <button>Выйти</button>
-            </form>
+
         </div>
     </div>
     </div>
